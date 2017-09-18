@@ -12,7 +12,7 @@ router.get('/:id', (req, res, next) => {
           .then((users) => {
             _reviews.findByAlbumID(req.params.id)
               .then((reviews) => {
-                res.render('album-info', {album, reviews, users})
+                res.render('album', {album, reviews, users})
               }).catch(next)
           }).catch(next)
     }).catch(next)

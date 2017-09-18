@@ -6,7 +6,7 @@ reviews.all = () =>
   db.all('reviews')
 
 reviews.latest3 = () => 
-  db.limit(3)
+  db.limit('reviews', 3)
 
 reviews.create = (userID, albumID, review) =>
   db.create(

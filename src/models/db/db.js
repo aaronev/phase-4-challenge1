@@ -1,4 +1,4 @@
-const pgp = require('pg-promise')()
+ pgp = require('pg-promise')()
 const dbName = 'vinyl'
 const connectionString = process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`
 const db = pgp(connectionString)
@@ -49,7 +49,7 @@ SQLInjections.limit = (table, limit) =>
     SELECT * 
     FROM ${table}
     ORDER BY timestamp DESC
-    LIMIT $1`, limt)
+    LIMIT $1`, limit)
   .catch(error => {
     console.log('limit = () => ', error)
     throw error
