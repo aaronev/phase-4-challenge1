@@ -8,12 +8,14 @@ router.get('/:id', (req, res, next) => {
     .then((albums) => {
       _users.findByID(req.params.id)
         .then((user) => {
-          !user
-            ? res.render('./errors/not-found')
-            : _reviews.findByUserID(req.params.id)
+          if (!user) {
+            next()
+          } else {
+            _reviews.findByUserID(req.params.id)
               .then((reviews) => {
                 res.render('user-profile', {albums, reviews, user})
               }).catch(next)
+          }
         }).catch(next)
     }).catch(next)
 })

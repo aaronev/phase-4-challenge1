@@ -23,16 +23,13 @@ passport.use('local', new LocalStrategy({
           'errorLogin',
           'Email not found, please sign up!'
         ))
+      } else if (users.validPassword(plainTextPassword, user.password)) {
+        return done(null, user)
+      } else {
+        return done(null, false, req.flash('errorLogin', 'Incorrect password!'))
       }
-      return users.toVerifyPassword(
-        plainTextPassword,
-        user.password)
-        ? done(null, user)
-        : done(null, false, req.flash(
-          'errorLogin',
-          'Incorrect password!'
-        ))
     })
-}))
+  })
+)
 
 module.exports = passport
