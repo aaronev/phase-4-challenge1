@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const _users = require('../../domain/users')
-const passport = require('../../config/authentication')
+const _users = require('../models/users')
+const passport = require('../config/authentication')
 
 router.route('/')
   .get((req, res) => {

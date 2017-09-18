@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const _albums = require('../../domain/albums')
-const _reviews = require('../../domain/reviews')
-const _users = require('../../domain/users')
+const _albums = require('../models/albums')
+const _reviews = require('../models/reviews')
+const _users = require('../models/users')
 
 router.get('/:id', (req, res, next) => {
   _albums.findByID(req.params.id)

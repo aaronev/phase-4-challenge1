@@ -1,6 +1,5 @@
 const router = require('express').Router()
-
-const _reviews = require('../../domain/reviews')
+const _reviews = require('../models/reviews')
 
 router.delete('/:id', (req, res, next) => {
   !req.user

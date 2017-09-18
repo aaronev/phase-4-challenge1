@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const passport = require('../../config/authentication')
+const passport = require('../config/authentication')
 
 router.route('/')
   .get((req, res) => {
