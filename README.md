@@ -2,30 +2,57 @@
 
 A community for record enthusiasts to review their favorite albums.
 
-Part of the application has already been built for you. Your job is to take it to completion.
-
 ## Getting Started
+
+### Set Up Database
+Use the following commands to set up and seed the PSQL database:
+```
+1. `$ npm run db:create`  : Create PostgreSQL database `vinyl`
+2. `$ npm run db:schema`  : Set ups the database tables
+3. `$ npm run db:seed`    : Loads the datas for each table
+```
+
+### Set Up Server
+Use the following commands to set up the server:
+```
+1. `$ npm install`        : Installs all dependencies
+2. `$ npm start`          : Server at http://localhost:3000
+```
+Once server is running sign up and then sign in.
+
+### Testing
+Integration Testing
+```
+1. `$ npm run test:integration` : Test SQL Injections I/O
+```
 
 Run `$ npm run` to see the list of commands available. To see what each command does, look at `package.json`.
 
-The app uses a basic Express file structure, and includes SQL files to set up the schema and import data.
+The app uses Express file structure, and includes SQL files to set up the schema and import data.
+
+### MVC
 
 ```sh
-src/
-  albums.sql          # seed album data
-  database.js         # database connection and queries
-  package.json        # npm standard
-  public/             # static assets go here
-  README.md           # you are here
-  schema.sql          # define database schema here
-  server.js           # web server
-  views/              # html templates go here
+README.md           # you are here
+package.json        # npm standard
+.eslintrc           # eslint config
 ```
-
-### Setting Up Your Database
-
-Use the following commands to set up and seed your database:
-
-1. Create PostgreSQL database `vinyl`: `$ npm run db:create`
-1. Set up database tables from `schema.sql`: `$ npm run db:schema`
-1. Load seed data from `albums.sql`: `$ npm run db:seed`
+```sh
+src/                # contains developer contents
+configurations/     # configurations throughout the codebase
+authentication.js   # configured passport authentication
+database/           # connection and queries
+database.js         # file within database for connections and queries
+schema.sql          # shows all the columns of each tables
+seed.sql            # seed the ablums, users, and reviews data
+domain/             # folder is for abstract functions 
+public/             # static folder for image files, css, & browser js
+routes/             # folder contains routes for server
+views/              # folder renders ejs html template
+server.js           # web server
+```
+```sh
+test/               # contains QA content
+integration/        # contains integration test files
+database.test.js    # test sql injection I/O
+```
