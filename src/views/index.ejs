@@ -7,7 +7,7 @@
 <h2>Records</h2>
 <div class="records">
   <% albums.forEach(function(album) { %>
-    <% include ./albums/title %>
+    <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
   <% }) %>
 </div>
 
@@ -16,7 +16,7 @@
   <% reviews.forEach(function(review) { %>
     <% albums.forEach(function(album) { %>
       <% if (album.id === review.album_id) { %>
-       <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
+        <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
       <% } %>
     <% }) %>
     <% include ./reviews/review%>

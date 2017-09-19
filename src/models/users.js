@@ -16,7 +16,7 @@ users.create = (name, email, password) =>
   db.create(
     'users', 
     ['name', 'email', 'password'], 
-    '($1, $2, $3)', 
+    '$1, $2, $3', 
     [name, email, encryptText(password)]
   )
 

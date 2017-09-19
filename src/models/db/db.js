@@ -26,17 +26,17 @@ SQLInjections.find = (table, column, value) =>
     throw error
   })
 
-SQLInjections.create = (table, columnsArray, $numsWithParens, valueArray) => 
-  db.any(`
+SQLInjections.create = (table, columnsArray, $numsString, valueArray) => 
+  db.none(`
     INSERT INTO ${table} (${columnsArray})
-    VALUES ${$nums}`, valueArray)
+    VALUES (${$numsString})`, valueArray)
   .catch(error => {
     console.log('create = () => ', error)
     throw error
   })
 
 SQLInjections.delete = (table, column, value) => 
-  db.any(`
+  db.none(`
     DELETE FROM ${table}
     WHERE ${column}=$1`, value)
   .catch(error => {

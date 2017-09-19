@@ -12,7 +12,7 @@ reviews.create = (userID, albumID, review) =>
   db.create(
     'reviews',
     ['user_id', 'album_id', 'review'],
-    '($1, $2, $3)',
+    '$1, $2, $3',
     [userID, albumID, review]
   )
 

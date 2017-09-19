@@ -18,8 +18,8 @@ router.route('/')
           req.flash('errorSignUp', 'Email already exist!')
           res.redirect('/sign-up')
         } else {
-          _users.create(name, email, password, '/img/no-dj.png')
-            .then(() => { next() }).catch(next)
+          _users.create(name, email, password)
+          .then(() => { next() }).catch(next)
         }
       }).catch(next)
   }, passport.authenticate('local'),
