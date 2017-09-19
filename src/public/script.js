@@ -5,6 +5,6 @@ function confirmDelete(reviewID) {
     fetch('/reviews/' + reviewID, {
       method: 'DELETE',
       credentials: 'include'
-    }).then(() => { return location.reload()})
+    }).then(location.reload())
   }
 }
