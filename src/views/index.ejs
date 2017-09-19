@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-
 <% include ./partials/header %>
-
-<img src="/img/vinyl-breaking.png"/>
-    
-<h2>Records</h2>
-<div class="records">
-  <% albums.forEach(function(album) { %>
-    <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
-  <% }) %>
+<div class="homepage">
+  <div class="img">
+    <img src="/img/vinyl-breaking.png"/>
+  </div>
+  <div class="container">
+    <div class="records">
+    <h2>Records</h2>
+      <% albums.forEach(function(album) { %>
+        <h3 class="title"><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
+        <h4><%= album.artist%></h4>
+      <% }) %>
+    </div>
+    <div class="reviews">
+      <h2>Recent Reviews</h2>
+      <% reviews.forEach(function(review) { %>
+        <div class="review">
+          <% albums.forEach(function(album) { %>  
+            <% if (album.id === review.album_id) { %>
+              <h3 class="title"><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
+            <% } %>
+          <% }) %>
+          <% include ./reviews/review %>
+          <% users.forEach(function(user) { %>
+            <% if (user.id === review.user_id) { %>
+              <h4 class="name text-right"><a href="/users/<%= user.id%>">By: <%= user.name %></a></h4>
+            <% } %>
+          <% }) %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
 </div>
-
-<h2>Recent Reviews</h2>
-<div class="reviews">
-  <% reviews.forEach(function(review) { %>
-    <% albums.forEach(function(album) { %>
-      <% if (album.id === review.album_id) { %>
-        <h3><a href="/albums/<%= album.id %>"><%= album.title %></a></h3>
-      <% } %>
-    <% }) %>
-    <% include ./reviews/review%>
-    <% users.forEach(function(user) { %>
-      <% if (user.id === review.user_id) {%>
-        <h4><a href="/users/<%= user.id%>">By: <%= user.name %></a></h4>
-      <% } %>
-    <% }) %>
-  <% }) %>
-</div>
-
-
 <% include ./partials/footer %>
