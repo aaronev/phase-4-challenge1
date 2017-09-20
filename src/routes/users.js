@@ -8,9 +8,8 @@ router.get('/:id', (req, res, next) => {
     .then((albums) => {
       Users.findByID(req.params.id)
         .then((user) => {
-          if (!user) {
-            next()
-          } else {
+          if (!user) next()
+          else {
             Reviews.findByUserID(req.params.id)
               .then((reviews) => {
                 res.render('user-profile', {albums, reviews, user})

@@ -3,9 +3,8 @@ const passport = require('../config/authentication')
 
 router.route('/')
   .get((req, res) => {
-    if (!req.user) {
-      res.render('sign-in')
-    } else {
+    if (!req.user) res.render('sign-in')
+    else {
       res.redirect(`/users/${req.user.id}`)
     }
   })

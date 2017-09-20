@@ -6,9 +6,8 @@ const Users = require('../models/users')
 router.get('/:id', (req, res, next) => {
   Albums.findByID(req.params.id)
     .then((album) => {
-      if (!album) {
-        next()
-      } else {
+      if (!album) next()
+      else {
         Users.all()
           .then((users) => {
             Reviews.findByAlbumID(req.params.id)
