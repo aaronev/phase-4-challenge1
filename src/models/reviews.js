@@ -1,28 +1,28 @@
-const db = require('./db/db.js')
+const DB = require('./db/db.js')
 
-const reviews = {}
+const Reviews = {}
 
-reviews.all = () =>
-  db.all('reviews')
+Reviews.all = () =>
+  DB.all('reviews')
 
-reviews.latest3 = () => 
-  db.limit(3)
+Reviews.latest3 = () =>
+  DB.limit('reviews', 3)
 
-reviews.create = (userID, albumID, review) =>
-  db.create(
+Reviews.findByUserID = ID =>
+  DB.find('reviews', 'user_id', ID)
+
+Reviews.findByAlbumID = ID =>
+  DB.find('reviews', 'album_id', ID)
+
+Reviews.delete = ID =>
+  DB.delete('reviews', 'id', ID)
+
+Reviews.create = (userID, albumID, review) =>
+  DB.create(
     'reviews',
     ['user_id', 'album_id', 'review'],
-    '($1, $2, $3)',
+    '$1, $2, $3',
     [userID, albumID, review]
   )
 
-reviews.findByUserID = ID => 
-  db.find('reviews', 'user_id', ID)
-
-reviews.findByAlbumID = ID => 
-  db.find('reviews', 'album_id', ID)
-
-reviews.delete = ID => 
-  db.delete('reviews', 'id', ID)
-
-module.exports = reviews
+module.exports = Reviews

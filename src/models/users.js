@@ -1,31 +1,31 @@
 const bcrypt = require('bcrypt')
-const db = require('./db/db.js')
+const DB = require('./db/db.js')
 
-const users = {}
+const Users = {}
 
-encryptText = (plainText) =>
+const encryptText = plainText =>
   bcrypt.hashSync(plainText, bcrypt.genSaltSync(10))
 
-users.validPassword = (plainText, hashedText) => 
+Users.validPassword = (plainText, hashedText) =>
   bcrypt.compareSync(plainText, hashedText)
 
-users.all = () => 
-  db.all('users')
+Users.all = () =>
+  DB.all('users')
 
-users.create = (name, email, password) => 
-  db.create(
-    'users', 
-    ['name', 'email', 'password'], 
-    '($1, $2, $3)', 
+Users.findByID = ID =>
+  DB.find('users', 'id', ID)
+    .then(users => users[0])
+
+Users.findByEmail = email =>
+  DB.find('users', 'email', email)
+    .then(users => users[0])
+
+Users.create = (name, email, password) =>
+  DB.create(
+    'users',
+    ['name', 'email', 'password'],
+    '$1, $2, $3',
     [name, email, encryptText(password)]
   )
 
-users.findByID = ID => 
-  db.find('users', 'id', ID)
-  .then(users => users[0])
-
-users.findByEmail = email => 
-  db.find('users', 'email', email)
-  .then(users => users[0])
-
-module.exports = users
+module.exports = Users

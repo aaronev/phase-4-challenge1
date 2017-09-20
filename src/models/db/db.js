@@ -5,54 +5,54 @@ const db = pgp(connectionString)
 
 const SQLInjections = {}
 
-SQLInjections.all = table => 
+SQLInjections.all = table =>
   db.any(`
-    SELECT * 
-    FROM ${table} 
+    SELECT *
+    FROM ${table}
     ORDER BY timestamp DESC`)
-  .catch(error => { 
-    console.log('all = () => ', error)
-    throw error
-  })
+    .catch((error) => {
+      console.error('all = () => ', error)
+      throw error
+    })
 
-SQLInjections.find = (table, column, value) => 
+SQLInjections.find = (table, column, value) =>
   db.any(`
-    SELECT * 
-    FROM ${table} 
-    WHERE ${column}=$1 
+    SELECT *
+    FROM ${table}
+    WHERE ${column}=$1
     ORDER BY timestamp DESC`, value)
-  .catch(error => {
-    console.log('find = () => ', error)
-    throw error
-  })
+    .catch((error) => {
+      console.error('find = () => ', error)
+      throw error
+    })
 
-SQLInjections.create = (table, columnsArray, $numsWithParens, valueArray) => 
-  db.any(`
+SQLInjections.create = (table, columnsArray, $numsString, valueArray) =>
+  db.none(`
     INSERT INTO ${table} (${columnsArray})
-    VALUES ${$nums}`, valueArray)
-  .catch(error => {
-    console.log('create = () => ', error)
-    throw error
-  })
+    VALUES (${$numsString})`, valueArray)
+    .catch((error) => {
+      console.error('create = () => ', error)
+      throw error
+    })
 
-SQLInjections.delete = (table, column, value) => 
-  db.any(`
+SQLInjections.delete = (table, column, value) =>
+  db.none(`
     DELETE FROM ${table}
     WHERE ${column}=$1`, value)
-  .catch(error => {
-    console.log('delete = () => ', error)
-    throw error
-  })
+    .catch((error) => {
+      console.error('delete = () => ', error)
+      throw error
+    })
 
-SQLInjections.limit = (table, limit) => 
+SQLInjections.limit = (table, limit) =>
   db.any(`
-    SELECT * 
+    SELECT *
     FROM ${table}
     ORDER BY timestamp DESC
-    LIMIT $1`, limt)
-  .catch(error => {
-    console.log('limit = () => ', error)
-    throw error
-  })
+    LIMIT $1`, limit)
+    .catch((error) => {
+      console.error('limit = () => ', error)
+      throw error
+    })
 
 module.exports = SQLInjections

@@ -11,10 +11,12 @@
     "semi": ["error", "never"],
     "object-curly-spacing": ["error", "never"],
     "no-use-before-define": ["error", {"functions": false, "classes": true}],
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "import/newline-after-import": "off",
+    "no-console": ["error", { allow: ["warn", "error"] }]
   },
   "env": {
     "browser": true,
     "node": true
-  }
+  },
 }

@@ -1,12 +1,12 @@
-const db = require('./db/db.js')
+const DB = require('./db/db.js')
 
-const albums = {}
+const Albums = {}
 
-albums.all = () => 
-  db.all('albums')
+Albums.all = () =>
+  DB.all('albums')
 
-albums.findByID = ID =>
-  db.findByID('albums', 'id', ID)
-  .then(albums => albums[0])
+Albums.findByID = ID =>
+  DB.find('albums', 'id', ID)
+    .then(albums => albums[0])
 
-module.exports = albums
+module.exports = Albums

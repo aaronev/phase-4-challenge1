@@ -1,14 +1,14 @@
 const router = require('express').Router()
-const _albums = require('../../domain/albums')
-const _reviews = require('../../domain/reviews')
-const _users = require('../../domain/users')
+const Albums = require('../models/albums')
+const Reviews = require('../models/reviews')
+const Users = require('../models/users')
 
 router.get('/', (req, res, next) => {
-  _albums.all()
+  Albums.all()
     .then((albums) => {
-      _users.all()
+      Users.all()
         .then((users) => {
-          _reviews.latest3()
+          Reviews.latest3()
             .then((reviews) => {
               res.render('index', {albums, reviews, users})
             }).catch(next)
