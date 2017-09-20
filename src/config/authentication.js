@@ -13,23 +13,18 @@ passport.deserializeUser((id, done) => {
 
 passport.use('local', new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'password',
-  passReqToCallback: true,
+  passReqToCallback: true
 }, (req, email, plainTextPassword, done) => {
   users.findByEmail(email)
     .then((user) => {
       if (!user) {
-        return done(null, false, req.flash(
-          'errorLogin',
-          'Email not found, please sign up!'
-        ))
-      } else if (users.validPassword(plainTextPassword, user.password)) {
-        return done(null, user)
-      } else {
-        return done(null, false, req.flash('errorLogin', 'Incorrect password!'))
+        return done(null, false, req.flash('errorLogin', 'Email not found, please sign up!'))
       }
+      if (users.validPassword(plainTextPassword, user.password)) {
+        return done(null, user)
+      }
+      return done(null, false, req.flash('errorLogin', 'Incorrect password!'))
     })
-  })
-)
+}))
 
 module.exports = passport
